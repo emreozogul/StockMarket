@@ -23,12 +23,14 @@ const API_KEY = process.env.ALPACA_API_KEY;
 const API_SECRET = process.env.ALPACA_API_SECRET_KEY;
 
 class DataStream {
-  constructor({ apiKey, secretKey, feed, symbolsString }) {
+  constructor({ apiKey, secretKey, feed, symbolsString, clientSocket }) {
     this.alpaca = new Alpaca({
       keyId: apiKey,
       secretKey,
       feed,
     });
+
+    this.clientSocket = clientSocket;
 
     const socket = this.alpaca.data_stream_v2;
 
@@ -45,27 +47,28 @@ class DataStream {
     });
 
     socket.onStockTrade((trade) => {
-      console.log(trade);
+      clientSocket.send(JSON.stringify(trade));
     });
 
     socket.onStockQuote((quote) => {
-      console.log(quote);
+      clientSocket.send(JSON.stringify(quote));
     });
 
     socket.onStockBar((bar) => {
-      console.log(bar);
+      clientSocket.send(JSON.stringify(bar));
     });
 
     socket.onStatuses((s) => {
-      console.log(s);
+      clientSocket.send(JSON.stringify(s));
     });
 
     socket.onStateChange((state) => {
-      console.log(state);
+      clientSocket.send(JSON.stringify(state));
     });
 
     socket.onDisconnect(() => {
       console.log("Disconnected");
+      clientSocket.send(JSON.stringify({ type: "disconnect" }));
     });
 
     socket.connect();
@@ -103,33 +106,23 @@ wss.on("connection", function (ws) {
 
         // Listen for real-time data
         stream.onStockTrade((trade) => {
-          if (trade.symbol == symbol) {
-            wss.send(JSON.stringify(trade));
-          }
+          ws.send(JSON.stringify(trade));
         });
 
         stream.onStockQuote((quote) => {
-          if (quote.symbol == symbol) {
-            wss.send(JSON.stringify(quote));
-          }
+          ws.send(JSON.stringify(quote));
         });
 
         stream.onStockBar((bar) => {
-          if (bar.symbol == symbol) {
-            wss.send(JSON.stringify(bar));
-          }
+          ws.send(JSON.stringify(bar));
         });
 
         stream.onStatuses((s) => {
-          if (s.symbol == symbol) {
-            wss.send(JSON.stringify(s));
-          }
+          ws.send(JSON.stringify(s));
         });
 
         stream.onStateChange((state) => {
-          if (state.symbol == symbol) {
-            wss.send(JSON.stringify(state));
-          }
+          wss.send(JSON.stringify(state));
         });
 
         stream.onDisconnect(() => {

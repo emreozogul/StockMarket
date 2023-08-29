@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import login_validate from "@/lib/validation/validate";
 import { useRouter } from "next/router";
 import AuthLayout from "@/components/containers/AuthLayout";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const [show, setShow] = useState(false);
@@ -44,14 +45,21 @@ export default function Login() {
   }
 
   return (
-    <AuthLayout>
+    <AuthLayout page={"login"}>
       <Head>
         <title>Login</title>
       </Head>
 
       <section className="w-3/4 mx-auto flex flex-col gap-10 py-4">
         <div className="title">
-          <h1 className="text-gray-800 text-4xl font-bold py-4">Explore</h1>
+          <motion.h1
+            className="text-gray-800 text-4xl font-bold py-4"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.3 }}
+          >
+            Explore
+          </motion.h1>
         </div>
 
         {/* form */}

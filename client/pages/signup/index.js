@@ -5,6 +5,7 @@ import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import { useFormik } from "formik";
 import { useState } from "react";
 import registerValidate from "@/lib/validation/validate";
+import { motion } from "framer-motion";
 
 import { useRouter } from "next/router";
 
@@ -38,7 +39,7 @@ export default function Register() {
   }
 
   return (
-    <AuthLayout>
+    <AuthLayout page={"register"}>
       <title>Register</title>
       <Head>
         <title>Register</title>
@@ -46,7 +47,14 @@ export default function Register() {
 
       <section className="w-3/4 mx-auto flex flex-col gap-10 py-4">
         <div className="title">
-          <h1 className="text-gray-800 text-4xl font-bold py-4">Register</h1>
+          <motion.h1
+            className="text-gray-800 text-4xl font-bold py-4"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.3 }}
+          >
+            Register
+          </motion.h1>
         </div>
 
         {/* form */}
@@ -104,7 +112,9 @@ export default function Register() {
               {...formik.getFieldProps("password")}
             />
             <span
-              className="icon flex items-center px-4"
+              className={`icon flex items-center px-4 ${
+                show.password ? "text-blue-500" : ""
+              }`}
               onClick={() => setShow({ ...show, password: !show.password })}
             >
               <HiFingerPrint size={25} />
