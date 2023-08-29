@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function NavbarDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activePage, setActivePage] = useState("Home");
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const path = router.pathname;
+    if (path === "/") {
+      setActivePage("");
+    } else {
+      setActivePage(path.substring(1));
+    }
+  }, [router.pathname]);
 
   function handleOpen() {
     setIsOpen(!isOpen);
@@ -49,33 +61,52 @@ export default function NavbarDropdown() {
             {/* Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" */}
             <Link href="/" legacyBehavior>
               <a
-                href="#"
-                className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900"
+                className={
+                  `text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 ` +
+                  (activePage === "" ? "bg-gray-100 text-gray-900" : "")
+                }
+                role="menuitem"
+              >
+                Home
+              </a>
+            </Link>
+            <Link href="/profile" legacyBehavior>
+              <a
+                className={
+                  `text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 ` +
+                  (activePage === "profile" ? "bg-gray-100 text-gray-900" : "")
+                }
                 role="menuitem"
               >
                 Profile
               </a>
             </Link>
-            <Link href="/login" legacyBehavior>
+            <Link href="/portfolio" legacyBehavior>
               <a
-                href="#"
-                className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900"
+                className={
+                  `text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 ` +
+                  (activePage === "portfolio"
+                    ? "bg-gray-100 text-gray-900"
+                    : "")
+                }
                 role="menuitem"
               >
                 Portfolio
               </a>
             </Link>
-            <Link href="/register" legacyBehavior>
+            <Link href="/about" legacyBehavior>
               <a
-                href="#"
-                className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900"
+                className={
+                  `text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 ` +
+                  (activePage === "about" ? "bg-gray-100 text-gray-900" : "")
+                }
                 role="menuitem"
               >
                 About
               </a>
             </Link>
-            <Link href="/register" legacyBehavior>
-              <form method="POST" action="#">
+            <Link href="/signout" legacyBehavior>
+              <form method="POST">
                 <button
                   type="submit"
                   className="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900"

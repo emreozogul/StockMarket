@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="w-full h-screen bg-tremor-background pt-4 pb-24">
+      <section className="w-full bg-tremor-background pt-4 pb-24">
         <main className="w-full h-full flex flex-col items-center gap-4">
           <div className="w-2/3 h-full bg-gradient-to-r from-custom-primary to-custom-secondary rounded-lg p-4">
             <motion.h1

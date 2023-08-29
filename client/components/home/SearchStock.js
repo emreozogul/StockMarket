@@ -42,7 +42,7 @@ export default function SearchStock() {
       ></input>
 
       {searchedResults.length > 0 && (
-        <div className="w-full h-72 relative z-10 flex flex-col gap-4 shadow-md overflow-y-scroll bg-tremor-background rounded-lg p-4 mt-4 cursor-pointer ">
+        <div className="w-1/2 h-72 absolute z-10 mt-20  px-2 flex flex-col gap-4 shadow-md overflow-y-scroll bg-blue-100 rounded-lg p-4 mt-4 cursor-pointer ">
           {searchedResults.map((stock) => (
             <div
               key={stock.symbol}

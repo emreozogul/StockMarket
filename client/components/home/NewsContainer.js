@@ -27,6 +27,8 @@ export default function NewsContainer({ newsData }) {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
                       })}
                     </p>
                   </div>

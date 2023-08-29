@@ -32,6 +32,7 @@ const StockPage = () => {
     <>
       <section className=" w-full  min-h-screen flex flex-col py-4 ">
         <div className=" w-full flex flex-col justify-center items-center ">
+          <StockData className="w-full h-1/2  mt-4 flex justify-center items-center " />
           <Card className=" w-2/3 h-full pb-10 justify-between items-center flex flex-col">
             <Card className="flex flex-col w-full  h-1/2 rounded-md">
               <div className="flex justify-between items-center">
@@ -68,7 +69,6 @@ const StockPage = () => {
               </div>
             </Card>
           </Card>
-          <StockData className="w-full h-1/2  mt-4 flex justify-center items-center " />
           <Card className=" w-2/3 h-full mt-4 flex justify-center items-center ">
             <div className="w-full h-full flex flex-col items-center overflow-y-auto px-4">
               <div className="text-2xl font-bold flex w-full justify-start items-center">
