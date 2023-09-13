@@ -129,7 +129,12 @@ export default function Login() {
                 onClick={handleGoogleSignin}
                 className="flex flex-row  justify-center items-center"
               >
-                <Image src={"/icons/google.svg"} width="20" height={20}></Image>
+                <Image
+                  src={"/icons/google.svg"}
+                  alt="google-icon"
+                  width="20"
+                  height={20}
+                ></Image>
               </button>
             </div>
             <div className="bg-blue-100 rounded-full p-2">
@@ -138,7 +143,12 @@ export default function Login() {
                 onClick={handleGithubSignin}
                 className=" rounded-full flex flex-row  justify-center items-center"
               >
-                <Image src={"/icons/github.svg"} width="24" height="24"></Image>
+                <Image
+                  src={"/icons/github.svg"}
+                  alt="github-icon"
+                  width="24"
+                  height="24"
+                ></Image>
               </button>
             </div>
           </div>
@@ -146,7 +156,7 @@ export default function Login() {
 
         <p className="text-center text-gray-400 ">
           don't have an account yet?{" "}
-          <Link href={"/register"} legacyBehavior>
+          <Link href={"/signup"} legacyBehavior>
             <a className="text-blue-700">Sign Up</a>
           </Link>
         </p>

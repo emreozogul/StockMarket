@@ -1,87 +1,79 @@
-// pages/stock/[symbol].js
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Card, Divider } from "@tremor/react";
 import StockData from "@/components/StockData";
-import axios from "axios";
-import NewsContainer from "@/components/home/NewsContainer";
+import { GeneralView, NewsContainer } from "@/components/stockpage";
+import FinancialChart from "@/components/stockpage/FinancialChart";
+import RecomContainer from "@/components/stockpage/RecomContainer";
 
-const StockPage = () => {
-  const [realTimeData, setRealTimeData] = useState({});
-  const [newsData, setNewsData] = useState([]);
-  const router = useRouter();
-  const { symbol } = router.query;
-  // Convert symbol to uppercase
-  const symbolUpperCase = symbol && symbol.toUpperCase();
-
-  useEffect(() => {
-    async function getRealTimeData() {
-      const params = {
-        symbol: symbolUpperCase,
-      };
-
-      const response = await axios.post("/api/stock-info/news", params);
-      const news = response.data.news;
-      setNewsData(news);
-    }
-
-    getRealTimeData();
-  }, [symbolUpperCase]);
-
+export default function StockPage({
+  newsData,
+  priceData,
+  quoteData,
+  recommendationsData,
+}) {
   return (
     <>
       <section className=" w-full  min-h-screen flex flex-col py-4 ">
-        <div className=" w-full flex flex-col justify-center items-center ">
-          <StockData className="w-full h-1/2  mt-4 flex justify-center items-center " />
-          <Card className=" w-2/3 h-full pb-10 justify-between items-center flex flex-col">
-            <Card className="flex flex-col w-full  h-1/2 rounded-md">
-              <div className="flex justify-between items-center">
-                <div className="text-2xl font-bold">
-                  {"#"}
-                  {symbolUpperCase}
-                </div>
-                <div className="text-sm font-bold">{"+%15"}</div>
-              </div>
-              <Divider />
-              <div className="flex flex-row justify-center items-center w-full h-full">
-                <div className="w-1/2 h-full  items-start justify-start flex flex-col ">
-                  <div className="  text-sm  font-bold">
-                    Price: $
-                    {realTimeData.price && realTimeData.price.toFixed(2)}
-                  </div>
-                  <div className=" text-sm font-bold">
-                    Change: $
-                    {realTimeData.change && realTimeData.change.toFixed(2)}
-                  </div>
-
-                  <div className="text-sm font-bold">
-                    Volume:{" "}
-                    {realTimeData.volume &&
-                      realTimeData.volume.toLocaleString("en-US")}
-                  </div>
-                  <div className="text-sm font-bold">
-                    Market Cap:{" "}
-                    {realTimeData.marketCap &&
-                      realTimeData.marketCap.toLocaleString("en-US")}
-                  </div>
-                </div>
-                <div className="w-1/2 h-full justify-start items-center flex flex-col "></div>
-              </div>
-            </Card>
-          </Card>
-          <Card className=" w-2/3 h-full mt-4 flex justify-center items-center ">
-            <div className="w-full h-full flex flex-col items-center overflow-y-auto px-4">
-              <div className="text-2xl font-bold flex w-full justify-start items-center">
-                Recent News
-              </div>
-              <Divider />
-              <NewsContainer newsData={newsData} />
-            </div>
-          </Card>
+        <div className=" w-full flex flex-col justify-center items-center gap-4 ">
+          <GeneralView priceData={priceData} quoteData={quoteData} />
+          <FinancialChart priceData={priceData} />
+          <RecomContainer recommendationsData={recommendationsData} />
+          <NewsContainer symbol={priceData.symbol} newsData={newsData} />
         </div>
       </section>
     </>
   );
-};
+}
 
-export default StockPage;
+export async function getServerSideProps({ params }) {
+  const { symbol } = params;
+  const symbolUpperCase = symbol && symbol.toUpperCase();
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ symbol: symbolUpperCase }),
+  };
+
+  const news = await fetch(
+    // fetch from api endpoint with symbol as a parameter /api/stock-info/news
+    // and pass in the options object
+    `http://localhost:3000/api/stock-info/news`,
+    options
+  );
+
+  const quote = await fetch(
+    // fetch from api endpoint with symbol as a parameter /api/stock-info/quote
+    // and pass in the options object
+    `http://localhost:3000/api/stock-info/quote`,
+    options
+  );
+
+  const recommendations = await fetch(
+    // fetch from api endpoint with symbol as a parameter /api/stock-info/recommendations
+    // and pass in the options object
+    `http://localhost:3000/api/stock-info/recommendations`,
+    options
+  );
+
+  const price = await fetch(
+    // fetch from api endpoint with symbol as a parameter /api/stock-info/price
+    // and pass in the options object
+    `http://localhost:3000/api/stock-info/price`,
+    options
+  );
+
+  const newsData = await news.json();
+  const priceData = await price.json();
+  const quoteData = await quote.json();
+  const recommendationsData = await recommendations.json();
+
+  return {
+    props: {
+      newsData,
+      priceData,
+      quoteData,
+      recommendationsData,
+    },
+  };
+}

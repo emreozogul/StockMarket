@@ -21,11 +21,11 @@ export default function Home() {
 
   return (
     <>
-      <section className="w-full bg-tremor-background pt-4 pb-24">
+      <section className="w-full bg-slate-300 pt-4 pb-24">
         <main className="w-full h-full flex flex-col items-center gap-4">
-          <div className="w-2/3 h-full bg-gradient-to-r from-custom-primary to-custom-secondary rounded-lg p-4">
+          <div className="w-2/3 h-full  p-4">
             <motion.h1
-              className="text-custom-text text-4xl font-bold "
+              className="text-black text-4xl font-bold "
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.3 }}
@@ -33,7 +33,7 @@ export default function Home() {
               Unlock Your Potential with Real-Time Stock Insights!
             </motion.h1>
             <motion.p
-              className="text-custom-text text-lg font-semibold "
+              className="text-black text-lg font-semibold "
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.3 }}
@@ -54,7 +54,7 @@ export default function Home() {
           </div>
         </main>
       </section>
-      <section className="w-full h-screen bg-tremor-background pt-4 pb-24">
+      <section className="w-full  bg-tremor-background pt-4 pb-24">
         <main className="w-full h-full flex flex-col items-center gap-4">
           <div className="w-2/3 h-full bg-gradient-to-r from-custom-primary to-custom-secondary rounded-lg p-4">
             <motion.h1
@@ -82,28 +82,3 @@ export default function Home() {
     </>
   );
 }
-
-/**
- * <div
-            className="w-2/3 h-full bg-gradient-to-r from-custom-primary to-custom-secondary rounded-lg p-4"
-            ref={ref}
-          >
-            <motion.h1
-              className="text-custom-text text-4xl font-bold py-4"
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: display ? 1 : 0, x: display ? 0 : -100 }}
-              transition={{ duration: 1.3 }}
-            >
-              Search for a Stock
-            </motion.h1>
-            <motion.p
-              className="text-custom-text text-lg font-semibold py-4"
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: display ? 1 : 0, x: display ? 0 : -100 }}
-              transition={{ duration: 1.3 }}
-            >
-              Search for a stock by its ticker symbol. For example, search for
-              "AAPL" to get information about Apple.
-            </motion.p>
-          </div>
- */

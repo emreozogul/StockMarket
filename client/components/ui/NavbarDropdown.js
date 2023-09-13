@@ -21,9 +21,9 @@ export default function NavbarDropdown() {
   }
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left z-50">
       <div
-        className="flex items-center justify-center rounded-lg gap-2 px-4 py-2 bg-[#EDE4FF] text-white shadow-md font-bold cursor-pointer"
+        className="flex items-center justify-center rounded-lg gap-2 px-4 py-2 bg-[#E7F6F2] text-white shadow-md font-bold cursor-pointer"
         onClick={handleOpen}
       >
         <div
@@ -52,7 +52,7 @@ export default function NavbarDropdown() {
 
       {isOpen ? (
         <div
-          className="origin-top-right absolute right-0 mt-2 w-56 z-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          className="origin-top-right absolute right-0 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
@@ -79,19 +79,6 @@ export default function NavbarDropdown() {
                 role="menuitem"
               >
                 Profile
-              </a>
-            </Link>
-            <Link href="/portfolio" legacyBehavior>
-              <a
-                className={
-                  `text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 ` +
-                  (activePage === "portfolio"
-                    ? "bg-gray-100 text-gray-900"
-                    : "")
-                }
-                role="menuitem"
-              >
-                Portfolio
               </a>
             </Link>
             <Link href="/about" legacyBehavior>

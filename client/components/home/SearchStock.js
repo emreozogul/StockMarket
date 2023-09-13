@@ -32,7 +32,7 @@ export default function SearchStock() {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col items-center gap-4">
+    <div className=" w-full h-full flex flex-col items-center gap-4">
       <input
         className="w-1/2 h-12 rounded-lg p-4 mt-4 focus:outline-none focus:ring-2 focus:ring-tremor-primary"
         type="text"
@@ -42,7 +42,7 @@ export default function SearchStock() {
       ></input>
 
       {searchedResults.length > 0 && (
-        <div className="w-1/2 h-72 absolute z-10 mt-20  px-2 flex flex-col gap-4 shadow-md overflow-y-scroll bg-blue-100 rounded-lg p-4 mt-4 cursor-pointer ">
+        <div className="w-1/2 h-72 absolute z-10 mt-24 px-2 flex flex-col gap-4 shadow-md overflow-y-scroll bg-blue-100 rounded-lg p-4 mt-4 cursor-pointer ">
           {searchedResults.map((stock) => (
             <div
               key={stock.symbol}

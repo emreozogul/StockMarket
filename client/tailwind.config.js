@@ -73,7 +73,7 @@ module.exports = {
         },
         // custom
         custom: {
-          primary: "#A076F9",
+          primary: "#5C8374",
           secondary: "#D7BBF5",
           th: "#EDE4FF",
           fg: "#0B1229",

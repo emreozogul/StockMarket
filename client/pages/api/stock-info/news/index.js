@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export default async function handler(req, res) {
   const { symbol } = req.body;
 
@@ -14,7 +12,7 @@ export default async function handler(req, res) {
     };
 
     const news = await fetch(
-      `https://data.alpaca.markets/v1beta1/news?sort=desc&symbols=${symbol}&limit=20`,
+      `https://data.alpaca.markets/v1beta1/news?sort=desc&symbols=${symbol}&limit=50`,
       options
     )
       .then((response) => response.json())

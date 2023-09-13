@@ -27,15 +27,16 @@ import {
   withDeviceRatio,
   withSize,
 } from "react-financial-charts";
-import { initialData } from "./data";
 
-export default function FChart() {
+export default function FChart({ barData }) {
+  console.log(barData);
+
   const ScaleProvider =
     discontinuousTimeScaleProviderBuilder().inputDateAccessor(
       (d) => new Date(d.date)
     );
   const height = 700;
-  const width = 900;
+  const width = 1200;
   const margin = { left: 0, right: 48, top: 0, bottom: 24 };
 
   const ema12 = ema()
@@ -56,9 +57,8 @@ export default function FChart() {
 
   const elder = elderRay();
 
-  const calculatedData = elder(ema26(ema12(initialData)));
-  const { data, xScale, xAccessor, displayXAccessor } =
-    ScaleProvider(initialData);
+  const calculatedData = elder(ema26(ema12(barData)));
+  const { data, xScale, xAccessor, displayXAccessor } = ScaleProvider(barData);
   const pricesDisplayFormat = format(".2f");
   const max = xAccessor(data[data.length - 1]);
   const min = xAccessor(data[Math.max(0, data.length - 100)]);

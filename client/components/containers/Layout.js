@@ -11,12 +11,12 @@ export default function Layout({ children }) {
     router.pathname === "/profile"
   ) {
     return <div className="min-h-screen w-full flex flex-col">{children}</div>;
+  } else {
+    return (
+      <div className="flex flex-col min-h-screen w-full">
+        <Navbar />
+        {children}
+      </div>
+    );
   }
-
-  return (
-    <div className="flex flex-col min-h-screen w-full">
-      <Navbar />
-      {children}
-    </div>
-  );
 }

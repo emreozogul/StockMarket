@@ -1,9 +1,10 @@
 export default async function handler(req, res) {
-  const { symbol } = req.body;
+  const { symbol, resolution, from, to } = req.body;
+  console.log(symbol, resolution, from, to);
 
   try {
     const metric = await fetch(
-      `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${process.env.FINNHUB_API_KEY}`
+      `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=${resolution}&from=${from}&to=${to}&token=${process.env.FINNHUB_API_KEY}`
     )
       .then((response) => response.json())
       .then((response) => {
