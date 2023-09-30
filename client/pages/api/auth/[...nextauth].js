@@ -31,7 +31,16 @@ export default NextAuth({
       },
     }),
   ],
-  callbacks: {},
+
+  callbacks: {
+    authorized({ req, token }) {
+      if (token) return true; // If there is a token, the user is authenticated
+    },
+  },
+
+  pages: {
+    signIn: "/auth/signin",
+  },
 
   secret: process.env.NEXTAUTH_SECRET,
   session: {

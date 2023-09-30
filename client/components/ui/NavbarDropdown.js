@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
 
 export default function NavbarDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function NavbarDropdown() {
   return (
     <div className="relative inline-block text-left z-50">
       <div
-        className="flex items-center justify-center rounded-lg gap-2 px-4 py-2 bg-[#E7F6F2] text-white shadow-md font-bold cursor-pointer"
+        className="flex items-center justify-center rounded-lg gap-2 px-4 py-2 bg-custom-secondary text-white shadow-md font-bold cursor-pointer"
         onClick={handleOpen}
       >
         <div
@@ -92,17 +93,17 @@ export default function NavbarDropdown() {
                 About
               </a>
             </Link>
-            <Link href="/signout" legacyBehavior>
-              <form method="POST">
-                <button
-                  type="submit"
-                  className="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900"
-                  role="menuitem"
-                >
-                  Sign out
-                </button>
-              </form>
-            </Link>
+
+            <button
+              type="submit"
+              className="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+              onClick={() => {
+                signOut();
+              }}
+            >
+              Sign out
+            </button>
           </div>
         </div>
       ) : null}

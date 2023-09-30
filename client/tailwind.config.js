@@ -73,16 +73,16 @@ module.exports = {
         },
         // custom
         custom: {
-          primary: "#5C8374",
-          secondary: "#D7BBF5",
-          th: "#EDE4FF",
-          fg: "#0B1229",
-          gradient: "linear-gradient(90deg, #A076F9 0%, #D7BBF5 100%)",
+          primary: "#003366",
+          secondary: "#66A3FF",
+          green: "#009933",
+          red: "#FF3300",
+          gold: "#FFD700",
           bg: {
-            DEFAULT: "#0B1229",
+            DEFAULT: "#F5F5F5",
           },
           text: {
-            DEFAULT: "#ffffff",
+            DEFAULT: "#333333",
           },
           border: {
             DEFAULT: "#1f2937",
